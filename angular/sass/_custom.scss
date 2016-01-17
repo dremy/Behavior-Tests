@@ -1,0 +1,201 @@
+//////////////////////
+// Angular Custom
+//////////////////////
+
+.form-item {
+  margin: 10px 0px;
+}
+
+textarea {
+  width: 50%;
+  border: 1px solid lightgray;
+  padding: 5px;
+}
+
+.input-group {
+  margin: 10px 0px;
+}
+
+.the-magic {
+  width: 45%;
+  display: inline-block;
+  vertical-align: top;
+}
+.code-box {
+  display: inline-block;
+  width: 45%;
+  vertical-align: top;
+}
+
+.form-group {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px;
+}
+
+input.form-text { 
+  min-width: 50px !important;
+  border: none;
+  border-bottom: 1px solid lightgray;
+  border-radius: 0px;
+  @include box-shadow (0px);
+}
+
+label {
+  min-width: 100px;
+}
+
+fieldset.collapsible-item {
+  border: none;
+}
+
+.fieldset-textfield {
+  margin-left: 100px;
+}
+
+fieldset .form-type-button {
+  clear: both;
+}
+
+.fieldset-textfield input {
+  clear: both;
+  display: block;
+  /*border:none;*/
+  width: 700px;
+}
+
+input {
+  &:focus {
+    outline: none;
+    border-bottom: 1px dashed lightgray;
+  }
+  &.ng-pristine {
+    border-bottom: 1px solid lightgray;
+  }
+  &.ng-dirty.ng-valid {
+    border-bottom: 1px solid green;
+    background: lightgreen;
+  }
+  &.ng-dirty.ng-invalid {
+    border-bottom: 1px solid red;
+    background: pink;  
+  }
+}
+
+.btn {
+  margin-top: 10px;
+}
+
+.remove-background {
+  margin-left: 100px;
+}
+
+.form-field-feature-title input {
+  font-size: 3em;
+}
+
+h1.white {
+  display: none;
+}
+
+.features-list {
+  margin-top: 1em;
+}
+
+.cssSlideUp {
+    @include transition (0.5s linear all);
+    height: 250px;
+    overflow: hidden;
+    &.ng-hide-add, .ng-hide-remove {
+      /* ensure visibility during the transition */
+      display: block !important; /* yes, important */
+    }
+    &.ng-hide {
+      @include transition (0.5s linear all);
+      height: 0;
+    }
+}
+
+.cssFade {
+  @include transition (0.5s linear all);
+  opacity: 1;
+  display: block !important; /* yes, important */
+  &.ng-hide-add, .ng-hide-remove {
+    /* ensure visibility during the transition */
+    display: block !important; /* yes, important */
+  }
+  &.ng-hide {
+      opacity: 0;
+      @include transition (0.5s linear all);
+  }
+}
+
+/* ANIMATIONS (FROM ANIMATE.CSS) ======================== */
+/* when hiding the picture 
+.ng-hide-add         { animation:0.5s lightSpeedOut ease; }
+
+/* when showing the picture 
+.ng-hide-remove      { animation:0.5s flipInX ease; }
+
+/* flip in */
+@keyframes flipInX {
+  0% {
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transition-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
+  }
+
+  60% {
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  100% {
+    transform: perspective(400px);
+    transform: perspective(400px);
+    transform: perspective(400px);
+  }
+}
+
+/* light speed out */
+@keyframes lightSpeedOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(100%, 0, 0) skewX(30deg);
+    transform: translate3d(100%, 0, 0) skewX(30deg);
+    opacity: 0;
+  }
+}
+
+@keyframes lightSpeedOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(100%, 0, 0) skewX(30deg);
+    transform: translate3d(100%, 0, 0) skewX(30deg);
+    transform: translate3d(100%, 0, 0) skewX(30deg);
+    opacity: 0;
+  }
+}
