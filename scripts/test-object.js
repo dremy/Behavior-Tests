@@ -14,7 +14,7 @@ var featureEmpty = {
   },
   scenarios: [
     {
-      id: '0',
+      scenarioId: '0',
       title: '',
       tags: '',
       steps: [
@@ -70,7 +70,9 @@ var featureEmbedly = {
   },
   scenarios: [
     {
+      scenarioId:0,
       title: 'View a list of Atoms.',
+      tags: '@api @javasript',
       steps: [
         {
           id: '0',
@@ -86,8 +88,10 @@ var featureEmbedly = {
         },
       ],
     },
-    /*{
+    {
+      scenarioId:1,      
       title: 'Delete a list of Atoms.',
+      tags: '@api @javasript',
       steps: [
         {
           id: '0',
@@ -102,6 +106,6 @@ var featureEmbedly = {
           detail: 'Then I should see the text "Placeholder #2"',
         },
       ],
-    },*/   
+    },  
   ],
 };

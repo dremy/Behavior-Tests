@@ -72,26 +72,26 @@
                 <input class="form-text required col-md-6" placeholder="Given..." value="{{step.detail}}" ng-model="step.detail" pu-elastic-input name="" type="text" required>
               </div>
               <div class="col-md-3">
-                <button class="btn btn-danger remove" ng-show="$last && steps.length > 1" ng-click="removeStep()">Remove</button>
+                <button class="btn btn-danger remove" ng-show="$last && scenario.steps.length > 1" ng-click="removeStep(scenario.scenarioId)">Remove</button>
               </div>
               <div class="form-item form-type-button">
-                <button class="btn btn-info" ng-show="$last" ng-click="addStep(scenario.id)">Add Step</button>
+                <button class="btn btn-info" ng-show="$last" ng-click="addStep(scenario.scenarioId)">Add Step</button>
               </div>
             </div>
             <!-- End NG Repeat Steps-->
           </div>
+          <button class="btn btn-danger remove" ng-show="$last && scenarios.length > 1" ng-click="removeScenario(scenario.scenarioId)">Remove</button>
         </div>
         <!-- End NG Repeat Scenarios-->
         <button class="btn btn-primary" ng-click="addScenario()">Add Scenario</button>
-        <button class="btn btn-danger remove" ng-show="$last && scenario.length > 1" ng-click="removeScenario()">Remove</button>
       </fieldset>  
       <fieldset class="collapsible-item">
-        <input class="btn btn-lg col-md-4 btn-success form-submit" type="submit" value="Save" ng-click="addFeature()">
+        <input class="btn btn-lg col-md-4 btn-success form-submit" type="submit" value="Save" ng-click="addFeature($coder)" ng-readonly="">
       </fieldset>
     </div>  
     <div class="code-box">
       <h3>Code</h3>
-      <div class="form-group">
+      <div class="form-group" id="code">
         <code ng-show="descriptionFilled()">
           Feature: {{featureCtrl.feature.title}}<br>
           &nbsp;&nbsp;As a {{featureCtrl.feature.descript.userType}}<br>
@@ -137,3 +137,12 @@
     </table>
   </div>
 </div>
+<script>
+  //var coder = document.getElementById('#code');
+  //console.log(coder);
+  /*var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    lineNumbers: true,
+    mode: "htmlmixed"
+  });
+  */
+</script>

@@ -72,25 +72,7 @@ myApp.config(function ($routeProvider) {
       })
   });
 
-  /*.config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'FeatureCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .when('/drupal', {
-        templateUrl: 'views/drupal.html',
-        controller: 'DrupalCtrl'        
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });*/
-
+  /********DRUPAL CONTROLLER*********/
   /*app.controller('DrupalCtrl', function($scope, $resource) {
     var url = 'http://localhost/angular/drupal';
 
@@ -111,8 +93,7 @@ myApp.config(function ($routeProvider) {
 
   });
 
-$("")
-
+  /********REGEX*********/
   /* $scope.regEx = $('#field-step').keyup( function(){
     var regExMatch = new RegEx( '^' + $(this).val() );
     $_LIs = $('#steps li');

@@ -14,78 +14,81 @@ myApp.controller('FeatureControl', function($scope, $routeParams, FeaturesDataOp
   $scope.params = $routeParams;
 
   // Blank Feature
-  this.feature = featureEmpty;
-  //console.log(this.feature);
-  //console.log(this.feature.scenarios[0]);
-  //$scope.feature = this.feature;
-  // Full Feature
-  // this.feature = feature;
+  this.feature = featureEmbedly; //featureEmpty;
 
+
+  ///////////////////////
+  /// Feature
+  ///////////////////////
   $scope.descript = this.feature.descript;
-  $scope.nbsp = '&nbsp;&nbsp;'
 
-  /* Scenario Show */
-  $scope.descriptionFilled = function () {
-    if ($scope.descript.userType && $scope.descript.goal && $scope.descript.reason) {
-      return true;      
+  ///////////////////////
+  /// Scenarios
+  ///////////////////////
+
+  //Before loading scenarios to scope, first...
+  if (this.feature.scenarios) {   //Validate a scenario exists
+    var scenariosCount = this.feature.scenarios.length; // Grab the number of scenarios
+    var scenariosIdCount = 0; // And prepare to validate that each scenario has an ID
+
+    for (var i = 0; i < scenariosCount; i++) {
+      if (this.feature.scenarios[i].scenarioId === i) { //If the ID value is not empty, then increment scenariosIDCount
+        scenariosIdCount++;
+      } 
     };
-  };
-
-
-  /*if (this.feature.length) {
-    console.log(this.feature);
-  }*/
-  //TO DO - add || scenario.title.length NVM .title IS A METHOD, CANT BE USED
-  if (this.feature.scenarios.length && this.feature.scenarios[0].steps.length) { //If the first scenario has steps
-    $scope.scenarios = this.feature.scenarios;
-    console.log($scope.scenarios); // Then set the scenario values
-    //$scope.scenarios = this.feature.scenarios;  
-    //console.log($scope.scenarios);
-    //$.each($scope.scenarios, function(i, val) {
-    //  console.log($scope.scenarios[i].steps);
-    //});
+    
+    if (scenariosCount === scenariosIdCount) { //If each Scenario has an ID, then...
+      $scope.scenarios = this.feature.scenarios; // Set the scenarios to scope      
+    }
   };
 
   $scope.addScenario = function () {
     //var newScenarioFirstStep = $scope.scenarios.length+1;
     var scenarioNumber = $scope.scenarios.length;
-    console.log(scenarioNumber);
+    console.log('Before: ' + scenarioNumber);
     $scope.scenarios.push({
-      id: scenarioNumber,
+      scenarioId: scenarioNumber,
       steps: [
         {
           id: '0',
         }
       ]
     });
+// Checks the above is working properly
+//    var newScenarioNumber = $scope.scenarios.length;
+//    console.log('After: ' + newScenarioNumber);
   };
 
-  $scope.removeScenario = function () {
-    console.log("Remove Scenario");
+  $scope.removeScenario = function (e) {
+    var lastScenario = $scope.scenarios.length-1;
+    console.log('Last Scenario is: ' + lastScenario);
+    console.log('Scenario ID is: ' + e);
+    if (lastScenario >= 1) {
+      $scope.scenarios.splice(lastScenario);
+    };
   };
-
-/*  if (this.feature.scenarios[0].steps.length) {
-    // If there's more than one scenario AND the first scenario has steps
-    $scope.scenariossteps = this.feature.scenarios[0].steps;
-  }*/    
 
   /* Scenario Steps */
 
-  if ($scope.scenarios.length) {
+  if ($scope.scenarios) {
     $scope.addStep = function (e) {
-      console.log(e);
-      var newStepNo = $scope.scenarios[e].steps.length+1;
-      var step = {id: newStepNo};
+      console.log('Scenario Id#: '+ e);
+      var newStepNo = $scope.scenarios[e].steps.length;
+      var step = {id: newStepNo++};
       $scope.scenarios[e].steps.push(step);
     };
 
-    /*$scope.removeStep = function () {
-      var lastStep = $scope.steps.length-1;
+    $scope.removeStep = function (e) {
+      var lastStep = $scope.scenarios[e].steps.length-1;
       if (lastStep >= 1) {
-        $scope.steps.splice(lastStep);
-      }
-    };*/
+        $scope.scenarios[e].steps.splice(lastStep);
+      };
+    };
   }
+
+  ///////////////////////
+  /// Background
+  ///////////////////////
 
   if (this.feature.background.steps.length) {
     $scope.backgroundSteps = this.feature.background.steps;
@@ -123,13 +126,20 @@ myApp.controller('FeatureControl', function($scope, $routeParams, FeaturesDataOp
     return $scope.background === 1;
   }; 
 
-  $(window).scroll(function() {
-    // Get scroll Y position
-    var scrollY = $(window).scrollTop();
-    var scrollingDiv = $('.code-box');
+  $scope.addFeature = function(e) {
+    console.log(e.target);
+  };
 
-    scrollingDiv
-      .stop()
-      .animate({'marginTop': ((scrollY + 30)+'px')}, 'slow');
-  });
+  ///////////////////////
+  /// Coder
+  ///////////////////////
+
+  /* Scenario Show */
+  $scope.descriptionFilled = function () {
+    if ($scope.descript.userType && $scope.descript.goal && $scope.descript.reason) {
+      return true;      
+    };
+  };
+
+  $scope.nbsp = '&nbsp;&nbsp;';
 });
