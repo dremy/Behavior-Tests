@@ -55,8 +55,9 @@
       </fieldset>
       <fieldset class="collapsible-item fieldset-scenarios cssFade" ng-show="descriptionFilled()">  
         <h3>Scenarios</h3>
+        <input class="form-text" placeholder="Search..." ng-model="searchKey"></input>
         <!--Start NG REPEAT Scenario -->
-        <div class="form-group" ng-repeat="(key,scenario) in scenarios">
+        <div class="form-group" ng-repeat="(key,scenario) in scenarios | filter: searchKey">
           <div class="form-item form-type-textfield">
             <label>Scenario:</label>
             <input class="form-text required" placeholder="Title" value="{{scenario.title}}" ng-model="scenario.title" type="text" required><br />

@@ -5,7 +5,10 @@ $(window).scroll(function() {
   var scrollY = $(window).scrollTop();
   var scrollingDiv = $('.code-box');
 
-  scrollingDiv
+  // If scroll passes 100px vertically down, then begin animation
+  if (scrollY > 100) {
+    scrollingDiv
     .stop()
-    .animate({'marginTop': ((scrollY + 30)+'px')}, 'slow');
+    .animate({'marginTop': ((scrollY - 100)+'px')}, 'slow');
+  };
 });
