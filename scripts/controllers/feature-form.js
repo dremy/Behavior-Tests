@@ -61,8 +61,6 @@ myApp.controller('FeatureControl', function($scope, $routeParams, FeaturesDataOp
 
   $scope.removeScenario = function (e) {
     var lastScenario = $scope.scenarios.length-1;
-    console.log('Last Scenario is: ' + lastScenario);
-    console.log('Scenario ID is: ' + e);
     if (lastScenario >= 1) {
       $scope.scenarios.splice(lastScenario);
     };
@@ -72,7 +70,6 @@ myApp.controller('FeatureControl', function($scope, $routeParams, FeaturesDataOp
 
   if ($scope.scenarios) {
     $scope.addStep = function (e) {
-      console.log('Scenario Id#: '+ e);
       var newStepNo = $scope.scenarios[e].steps.length;
       var step = {id: newStepNo++};
       $scope.scenarios[e].steps.push(step);
