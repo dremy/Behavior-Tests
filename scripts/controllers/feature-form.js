@@ -34,7 +34,7 @@ myApp.controller('FeatureControl', function($scope, $routeParams, FeaturesDataOp
     for (var i = 0; i < scenariosCount; i++) {
       if (this.feature.scenarios[i].scenarioId === i) { //If the ID value is not empty, then increment scenariosIDCount
         scenariosIdCount++;
-      } 
+      }
     };
     
     if (scenariosCount === scenariosIdCount) { //If each Scenario has an ID, then...

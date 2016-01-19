@@ -14,8 +14,8 @@ myApp.controller('ListController', function($scope, $routeParams, FeaturesDataOp
   $scope.params = $routeParams;
   
   // Service
-  $scope.status;
-  $scope.features;
+  $scope.status; //Register status
+  $scope.features; //Register features
   getFeatures();
 
   function getFeatures() {
