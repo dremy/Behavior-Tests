@@ -1,0 +1,152 @@
+<div>
+  <form class="feature-form" ng-controller="FeatureControl as featureCtrl" ng-submit="feature.addFeature(feature)" novalidate>
+    <div class="input-group form-item form-type-textfield form-field-feature-title">
+      <label class="sr-only">Feature:</label>
+      <input class="form-text required" placeholder="Feature" value="{{featureCtrl.feature.title}}" ng-model="featureCtrl.feature.title" type="text" pu-elastic-input required></input>
+    </div>
+    <div class="the-magic">
+      <fieldset class="collapsible-item fieldset-feature">
+        <h3>Description</h3>
+        <div class="form-group">
+          <h4>User Story</h4>
+          <div class="input-group">
+            <label class="sr-only">User Type:</label>
+            <span class="input-group-addon">As a</span>
+            <input class="form-control form-text required" placeholder="type of user.." value="{{featureCtrl.feature.descript.userType}}" pu-elastic-input ng-model="featureCtrl.feature.descript.userType" type="text" required>
+            </input>
+          </div>
+          <div class="input-group">
+            <label class="sr-only">Goal:</label>
+            <span class="input-group-addon">I want to</span>                  
+            <input class="form-control form-text required" placeholder="some goal..." value="{{featureCtrl.feature.descript.goal}}" pu-elastic-input ng-model="featureCtrl.feature.descript.goal" type="text" required>
+            </input>
+          </div>
+          <div class="input-group">
+            <label class="sr-only">Reason:</label>
+            <span class="input-group-addon">So that I</span>
+            <input class="form-control form-text required" placeholder="some reason..." value="{{featureCtrl.feature.descript.reason}}" pu-elastic-input ng-model="featureCtrl.feature.descript.reason" type="text" required>
+            </input>
+          </div>
+        </div>
+        <button class="btn btn-primary cssFade" ng-click="setBackground()" ng-show="!backgroundSet()">Add Background</button>
+      </fieldset>  
+      <fieldset class="collapsible-item cssFade" ng-show="backgroundSet()">
+        <h3>Background</h3>
+        <div class="form-group">
+          <div class="form-item form-type-textfield">
+            <label>Steps:</label>
+            <div class="fieldset-textfield" ng-repeat="(key,backgroundStep) in backgroundSteps">
+              <label class="sr-only">Step:</label>
+              <div class="col-md-9">
+                <input class="form-text required" placeholder="Given..." value="{{backgroundStep.detail}}" ng-model="backgroundStep.detail" name="" type="text" pu-elastic-input required>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-danger remove" ng-show="$last && backgroundSteps.length > 1" ng-click="removeBackgroundStep()">Remove</button>
+              </div>
+              <div class="form-item form-type-button">
+                <button class="btn btn-info" ng-show="$last" ng-click="addBackgroundStep()">Add Step</button>
+                <!--{{ backgroundSteps }}-->
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-default" ng-click="unsetBackground()" ng-show="backgroundSet()">Remove Background</button>
+        <!--<textarea class="required" rows="5" required>
+        </textarea>-->
+      </fieldset>
+      <fieldset class="collapsible-item fieldset-scenarios cssFade" ng-show="descriptionFilled()">  
+        <h3>Scenarios</h3>
+        <div class="form-group">
+          <input class="form-text" placeholder="Search..." ng-model="searchKey"></input>
+        </div>
+        <!--Start NG REPEAT Scenario -->
+        <div class="form-group" ng-repeat="(key,scenario) in scenarios | filter: searchKey">
+          <div class="form-item form-type-textfield">
+            <label>Scenario:</label>
+            <input class="form-text required" placeholder="Title" value="{{scenario.title}}" ng-model="scenario.title" type="text" required><br />
+            <label>Tags:</label>
+            <input class="form-text required" placeholder="@tag, @tag2" value="{{scenario.tags}}" ng-model="scenario.tags" type="text" required>
+          </div>
+          <div class="form-item form-type-textfield">
+            <label>Steps:</label>
+            <!--Start NG REPEAT Steps -->
+            <div class="fieldset-textfield" ng-repeat="step in scenario.steps">
+              <label class="sr-only">Step:</label>
+              <div class="col-md-9">
+                <input class="form-text required col-md-6" placeholder="Given..." value="{{step.detail}}" ng-model="step.detail" pu-elastic-input name="" type="text" required>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-danger remove" ng-show="$last && scenario.steps.length > 1" ng-click="removeStep(scenario.scenarioId)">Remove</button>
+              </div>
+              <div class="form-item form-type-button">
+                <button class="btn btn-info" ng-show="$last" ng-click="addStep(scenario.scenarioId)">Add Step</button>
+              </div>
+            </div>
+            <!-- End NG Repeat Steps-->
+          </div>
+          <button class="btn btn-danger remove" ng-show="$last && scenarios.length > 1" ng-click="removeScenario(scenario.scenarioId)">Remove</button>
+        </div>
+        <!-- End NG Repeat Scenarios-->
+        <button class="btn btn-primary" ng-click="addScenario()">Add Scenario</button>
+      </fieldset>  
+      <fieldset class="collapsible-item">
+        <input class="btn btn-lg col-md-4 btn-success form-submit" type="submit" value="Save" ng-disabled="featureCtrl.feature.title == ''" ng-click="addFeature($coder)">
+      </fieldset>
+    </div>  
+    <div class="code-box">
+      <h3>Code</h3>
+      <div class="form-group" id="code">
+        <code ng-show="descriptionFilled()">
+          Feature: {{featureCtrl.feature.title}}<br>
+          &nbsp;&nbsp;As a {{featureCtrl.feature.descript.userType}}<br>
+          &nbsp;&nbsp;I want to {{featureCtrl.feature.descript.goal}}<br>
+          &nbsp;&nbsp;So that I {{featureCtrl.feature.descript.reason}}<br>
+        </code>
+        <code ng-show="backgroundSet()">
+          <br>
+          &nbsp;&nbsp;Background:<br>
+          <span ng-repeat="backgroundStep in backgroundSteps">
+          &nbsp;&nbsp;&nbsp;&nbsp;{{backgroundStep.detail}}<br>
+          </span>
+        </code>
+        <code ng-show="descriptionFilled()" >
+          <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scenarios:<br>
+          <span ng-repeat="(key,scenario) in scenarios">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scenario {{key+1}}: {{scenario.title}}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{scenario.tags}}<br>
+            <span ng-repeat="step in scenario.steps">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{step.detail}}<br>
+          </span>
+        </span>
+        </code>
+      </div>
+    </div>              
+  </form>
+</div>
+<div class="features-list">
+  <h2>Features</h2>
+  <div ng-controller="ListController as listCtrl" >
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>#</th>
+        <th>Features</th>
+        <th>Edit</th>
+      </tr>
+      <tr ng-repeat="feature in features">
+        <td>{{$index+1}}</td>
+        <td><a href="#/{{feature.nid}}">{{feature.title}}</a></td>
+        <td><a href="#/{{feature.nid}}/edit">Edit</a></td>      
+      </tr>
+    </table>
+  </div>
+</div>
+<script>
+  //var coder = document.getElementById('#code');
+  //console.log(coder);
+  /*var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    lineNumbers: true,
+    mode: "htmlmixed"
+  });
+  */
+</script>

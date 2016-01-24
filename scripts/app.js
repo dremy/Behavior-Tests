@@ -23,7 +23,19 @@ var myApp = angular
 myApp.config(function ($routeProvider) {
     $routeProvider
       .when('/' , {
-        templateUrl: 'views/main.html',
+        templateUrl: 'views/feature.html',
+        controller: 'FeatureControl',
+        resolve: {
+        // I will cause a 0 second delay
+          delay: function($q, $timeout) {
+            var delay = $q.defer();
+            $timeout(delay.resolve, 0); //Values in Milliseconds
+            return delay.promise;
+          }
+        }
+      })
+      .when('/feature' , {
+        templateUrl: 'views/feature.html',
         controller: 'FeatureControl',
         resolve: {
         // I will cause a 0 second delay
@@ -61,6 +73,18 @@ myApp.config(function ($routeProvider) {
       .when('/contact' , {
         templateUrl: 'views/contact.html',
         controller: 'ContactCtrl',
+        resolve: {
+        // I will cause a 0 second delay
+            delay: function($q, $timeout) {
+            var delay = $q.defer();
+            $timeout(delay.resolve, 0);
+            return delay.promise;
+          }
+        }
+      })
+      .otherwise({
+        templateUrl: 'views/about.html',
+        controller: 'AboutCtrl',
         resolve: {
         // I will cause a 0 second delay
             delay: function($q, $timeout) {
